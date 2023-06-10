@@ -1,23 +1,41 @@
 import React from "react";
 import { useCart } from "../context/CartContext";
-import { CartItem } from "../context/CartContext";
+import { CartItem, ProductsType } from "@/types";
 
-export type ProductsType = {
-  products: Product[];
-};
-
-export type Product = {
-  id: number;
-  name: string;
-  price: number;
-};
+export const products = [
+  {
+    id: 1,
+    name: "Shorts",
+    price: 45,
+  },
+  {
+    id: 2,
+    name: "Jacket",
+    price: 60,
+  },
+  {
+    id: 3,
+    name: "Pants",
+    price: 40,
+  },
+  {
+    id: 4,
+    name: "Shoe Laces",
+    price: 10,
+  },
+  {
+    id: 5,
+    name: "Vinyl Record",
+    price: 34,
+  },
+];
 
 export const Products = ({ products }: ProductsType) => {
   const { addToCart } = useCart();
 
   return (
     <div>
-      Products
+      <h2 className="py-10 my-10 text-4xl">Products</h2>
       <div className="flex">
         {products
           ? products.map((product) => {

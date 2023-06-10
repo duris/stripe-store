@@ -1,21 +1,11 @@
 import { createContext, useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
-
-export type CartItem = {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-};
-
-type Cart = {
-  items: CartItem[];
-  addToCart: (item: CartItem) => void;
-};
+import { Cart, CartItem } from "@/types";
 
 const initValue: Cart = {
   items: [],
   addToCart: async () => {},
+  removeFromCart: () => {},
 };
 
 const CartContext = createContext<Cart>(initValue);
@@ -43,8 +33,14 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     setCartItems(prevCartItems);
   };
 
+  const removeFromCart = (item: CartItem) => {
+    setCartItems(cartItems.filter((i: CartItem) => i.id !== item.id));
+  };
+
   return (
-    <CartContext.Provider value={{ items: cartItems, addToCart }}>
+    <CartContext.Provider
+      value={{ items: cartItems, addToCart, removeFromCart }}
+    >
       {children}
     </CartContext.Provider>
   );

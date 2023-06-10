@@ -2,7 +2,7 @@ import React from "react";
 import { useCart } from "../context/CartContext";
 
 const ShoppingCart = () => {
-  const { items } = useCart();
+  const { items, removeFromCart } = useCart();
 
   return (
     <div className="fixed top-0 right-0">
@@ -20,7 +20,7 @@ const ShoppingCart = () => {
               return (
                 <div
                   key={item.id}
-                  className="grid grid-cols-4 grid-col-4 border rounded-md p-2 m-2 text-center"
+                  className="grid grid-cols-5 border rounded-md p-2 m-2 text-center"
                 >
                   <span className=" border-r border-slate-400">
                     {item.name}
@@ -32,6 +32,7 @@ const ShoppingCart = () => {
                     x {item.quantity}
                   </span>
                   <span className="">${item.quantity * item.price}</span>
+                  <button onClick={() => removeFromCart(item)}>Delete</button>
                 </div>
               );
             })
